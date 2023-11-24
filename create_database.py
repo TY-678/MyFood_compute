@@ -54,7 +54,8 @@ cursor.execute(f"create table `user_info`(\
                `target_time` decimal(5,1),\
                `tdee` decimal(5,1)\
                );")
-    
+
+cursor.execute(f"insert into `user_info` values (NULL, 0, 0, 0, 0, 0);")
 
 cursor.close()
 connection.commit()
