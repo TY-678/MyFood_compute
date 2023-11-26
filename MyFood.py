@@ -149,10 +149,7 @@ class MyApplication(QtWidgets.QMainWindow):
         for food in self.scan_list:
             #add to `user_food_history`
             self.sql.sql_connect()
-
             self.sql.cursor.execute(f"insert into `user_food_history` values ('{formatted_date}', {food})")
-            f = self.sql.cursor.fetchall()
-
             self.sql.sql_close()
             
         self.delete_list()
@@ -168,11 +165,11 @@ class MyApplication(QtWidgets.QMainWindow):
 
             
             message = f'''
-每日建議攝取熱量 : {can_eat:>6.1f} cal
-本日總共攝取熱量 : {day_total:>6.1f} cal
+每日建議攝取熱量 : {can_eat:>6.1f} Cal
+本日總共攝取熱量 : {day_total:>6.1f} Cal
 '''
-            if can_eat > day_total: message += f'還可以再吃 : {can_eat - day_total:>6.1f} cal'
-            elif can_eat < day_total : message += f'本日攝取熱量超過建議量 : {day_total - can_eat:>6.1f} cal'
+            if can_eat > day_total: message += f'還可以再吃 : {can_eat - day_total:>6.1f} Cal'
+            elif can_eat < day_total : message += f'本日攝取熱量超過建議量 : {day_total - can_eat:>6.1f} Cal'
             else : message += f'攝取熱量剛好符合建議值'
 
             msg_box.setWindowTitle("今日統計")
@@ -251,25 +248,6 @@ where `Date` = '{formatted_date}';")
         self.ui.day_total.setPlainText(str(f'{self.user_info.day_total:.1f}'))
         self.ui.pred_weight.setPlainText(str(f'{self.user_info.pred_weight():.1f}'))
             
-
-
-
-
-# def sql_connect(self):
-#     self.connection = mysql.connector.connect(host='localhost',
-#                                      port='3306',
-#                                      user='root',
-#                                      password='a20170371',
-#                                      database='MyFood'
-#                                      )
-#     self.cursor = self.connection.cursor()
-
-# def sql_close(self):
-#     self.cursor = self.cursor.close()
-#     self.connection.commit()
-#     self.connection = self.connection.close()
-
-
 
 
 
