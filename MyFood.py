@@ -76,13 +76,9 @@ class MyApplication(QtWidgets.QMainWindow):
 
     def update_user_info(self):
         # 獲取使用者輸入的數值
-        self.user_info.user_height = float(self.ui.user_height.toPlainText())
-        self.user_info.user_weight = float(self.ui.user_weight.toPlainText())
-        self.user_info.target_weight = float(self.ui.target_weight.toPlainText())
-        self.user_info.target_time = float(self.ui.target_time.toPlainText())
-        self.user_info.tdee = float(self.ui.tdee.toPlainText())
+        self.user_info.user_height, self.user_info.user_weight, self.user_info.target_weight,\
+        self.user_info.target_time, self.user_info.tdee = self.ui.update_userinfo()
 
-        
         # user info save to database
         self.sql.sql_connect()
         self.sql.cursor.execute(f"insert into `user_info` values (NULL, {self.user_info.user_height}, {self.user_info.user_weight}, {self.user_info.target_weight}, {self.user_info.target_time}, {self.user_info.tdee});")
@@ -255,6 +251,23 @@ where `Date` = '{formatted_date}';")
         self.ui.day_total.setPlainText(str(f'{self.user_info.day_total:.1f}'))
         self.ui.pred_weight.setPlainText(str(f'{self.user_info.pred_weight():.1f}'))
             
+
+
+
+
+# def sql_connect(self):
+#     self.connection = mysql.connector.connect(host='localhost',
+#                                      port='3306',
+#                                      user='root',
+#                                      password='a20170371',
+#                                      database='MyFood'
+#                                      )
+#     self.cursor = self.connection.cursor()
+
+# def sql_close(self):
+#     self.cursor = self.cursor.close()
+#     self.connection.commit()
+#     self.connection = self.connection.close()
 
 
 

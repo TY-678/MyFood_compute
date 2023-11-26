@@ -108,9 +108,17 @@ class Ui_MainWindow(object):
         self.user_weight = QtWidgets.QTextEdit(self.tab_4)
         self.user_weight.setGeometry(QtCore.QRect(290, 90, 111, 31))
         self.user_weight.setObjectName("user_weight")
-        self.tdee = QtWidgets.QTextEdit(self.tab_4)
-        self.tdee.setGeometry(QtCore.QRect(290, 210, 111, 31))
-        self.tdee.setObjectName("tdee")
+        self.exercises = QtWidgets.QTextEdit(self.tab_4)
+        self.exercises.setGeometry(QtCore.QRect(290, 210, 111, 31))
+        self.exercises.setObjectName("exercises")
+        # 性別年齡
+        self.age = QtWidgets.QTextEdit(self.tab_4)
+        self.age.setGeometry(QtCore.QRect(290, 250, 111, 31))
+        self.age.setObjectName("age")
+        self.gender = QtWidgets.QTextEdit(self.tab_4)
+        self.gender.setGeometry(QtCore.QRect(290, 290, 111, 31))
+        self.gender.setObjectName("gender")
+        
         self.label = QtWidgets.QLabel(self.tab_4)
         self.label.setGeometry(QtCore.QRect(180, 60, 60, 16))
         self.label.setObjectName("label")
@@ -121,13 +129,23 @@ class Ui_MainWindow(object):
         self.label_3.setGeometry(QtCore.QRect(180, 100, 60, 16))
         self.label_3.setObjectName("label_3")
         self.label_4 = QtWidgets.QLabel(self.tab_4)
-        self.label_4.setGeometry(QtCore.QRect(180, 220, 60, 16))
+        self.label_4.setGeometry(QtCore.QRect(180, 220, 80, 16))
         self.label_4.setObjectName("label_4")
         self.label_5 = QtWidgets.QLabel(self.tab_4)
         self.label_5.setGeometry(QtCore.QRect(180, 140, 60, 16))
         self.label_5.setObjectName("label_5")
+        # 性別年齡
+
+        self.label_11 = QtWidgets.QLabel(self.tab_4)
+        self.label_11.setGeometry(QtCore.QRect(180, 260, 60, 16))
+        self.label_11.setObjectName("label_4")
+        self.label_12 = QtWidgets.QLabel(self.tab_4)
+        self.label_12.setGeometry(QtCore.QRect(180, 300, 60, 16))
+        self.label_12.setObjectName("label_5")
+
+
         self.update_userinfo_Button = QtWidgets.QPushButton(self.tab_4)
-        self.update_userinfo_Button.setGeometry(QtCore.QRect(290, 260, 113, 32))
+        self.update_userinfo_Button.setGeometry(QtCore.QRect(290, 340, 113, 32))
         self.update_userinfo_Button.setObjectName("update_userinfo_Button")
         self.tabWidget.addTab(self.tab_4, "")
         MainWindow.setCentralWidget(self.centralwidget)
@@ -186,16 +204,32 @@ class Ui_MainWindow(object):
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">kg</p></body></html>"))
-        self.tdee.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.exercises.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">kcal</p></body></html>"))
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">0~7</p></body></html>"))
+        
+        self.gender.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">男/女</p></body></html>"))
+
+        self.age.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">yesrs old</p></body></html>"))
+
+
         self.label.setText(_translate("MainWindow", "身高"))
         self.label_2.setText(_translate("MainWindow", "目標時間"))
         self.label_3.setText(_translate("MainWindow", "目前體重"))
-        self.label_4.setText(_translate("MainWindow", "TDEE"))
+        self.label_4.setText(_translate("MainWindow", "每週運動天數"))
         self.label_5.setText(_translate("MainWindow", "目標體重"))
+        self.label_11.setText(_translate("MainWindow", "年齡"))
+        self.label_12.setText(_translate("MainWindow", "性別"))
         self.update_userinfo_Button.setText(_translate("MainWindow", "更新"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("MainWindow", "個人資料"))
         self.update_userinfo_Button.clicked.connect(self.update_userinfo)
@@ -206,7 +240,14 @@ class Ui_MainWindow(object):
         user_height = float(self.user_height.toPlainText())
         target_weight = float(self.target_weight.toPlainText())
         target_time = float(self.target_time.toPlainText())
-        tdee = float(self.tdee.toPlainText())
+        gender = str(self.gender.toPlainText())
+        age = float(self.age.toPlainText())
+        exercises = float(self.exercises.toPlainText())
+        
+        c = 1.2 if exercises == 0 else (1.375 if exercises < 3 else (1.55 if exercises < 6 else 1.725))
+        bmr = 10 * user_weight + 6.25 * user_height - 5 * age + 5 if gender == '男' else 10 * user_weight + 6.25 * user_height - 5 * age -161
+        tdee = bmr * c
+
 
         return user_height, user_weight, target_weight, target_time, tdee
 
