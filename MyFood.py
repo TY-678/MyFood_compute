@@ -165,9 +165,9 @@ class MyApplication(QtWidgets.QMainWindow):
 
             
             message = f'''
-每日建議攝取熱量 : {can_eat:>6.1f} Cal
-本日總共攝取熱量 : {day_total:>6.1f} Cal
-'''
+            每日建議攝取熱量 : {can_eat:>6.1f} Cal
+            本日總共攝取熱量 : {day_total:>6.1f} Cal
+            '''
             if can_eat > day_total: message += f'還可以再吃 : {can_eat - day_total:>6.1f} Cal'
             elif can_eat < day_total : message += f'本日攝取熱量超過建議量 : {day_total - can_eat:>6.1f} Cal'
             else : message += f'攝取熱量剛好符合建議值'
@@ -198,10 +198,10 @@ class MyApplication(QtWidgets.QMainWindow):
 
 
         self.sql.cursor.execute(f"select `Product`, `Calories`, `Carbohydrate`, `Protein`, `Fat`, `Sodium`, `Sugar`\
-from `food_list`\
-join `user_food_history`\
-on `food_list`.`ID` = `user_food_history`.`ID`\
-where `Date` = '{check_date}';")
+                                from `food_list`\
+                                join `user_food_history`\
+                                on `food_list`.`ID` = `user_food_history`.`ID`\
+                                where `Date` = '{check_date}';")
         f = self.sql.cursor.fetchall()
 
         self.sql.sql_close()
@@ -215,7 +215,7 @@ where `Date` = '{check_date}';")
             for j in range(1,7):
                 total[j-1] += float(i[j])
         self.ui.listWidget_2.addItem(f'{print_line}')
-        self.ui.listWidget_2.addItem(f'Total : {total[0]:>14.1f}{total[1]:>7.1f}{total[2]:>7.1f}{total[3]:>7.1f}{total[4]:>8.1f}{total[5]:>7.1f} \n\n\n\n\n\n\n\n\n\n\n')
+        self.ui.listWidget_2.addItem(f'Total : {total[0]:>14.1f}{total[1]:>7.1f}{total[2]:>7.1f}{total[3]:>7.1f}{total[4]:>8.1f}{total[5]:>7.1f} \n')
         total = [0, 0, 0, 0, 0, 0]
 
 
@@ -227,10 +227,10 @@ where `Date` = '{check_date}';")
         self.sql.sql_connect()
 
         self.sql.cursor.execute(f"select `Product`, `Calories`, `Carbohydrate`, `Protein`, `Fat`, `Sodium`, `Sugar`\
-from `food_list`\
-join `user_food_history`\
-on `food_list`.`ID` = `user_food_history`.`ID`\
-where `Date` = '{formatted_date}';")
+                                from `food_list`\
+                                join `user_food_history`\
+                                on `food_list`.`ID` = `user_food_history`.`ID`\
+                                where `Date` = '{formatted_date}';")
         f = self.sql.cursor.fetchall()
 
         self.sql.sql_close()
@@ -243,7 +243,7 @@ where `Date` = '{formatted_date}';")
             for j in range(1,7):
                 total[j-1] += float(i[j])
         self.ui.listWidget_3.addItem(f'{print_line}')
-        self.ui.listWidget_3.addItem(f'Total : {total[0]:>14.1f}{total[1]:>7.1f}{total[2]:>7.1f}{total[3]:>7.1f}{total[4]:>8.1f}{total[5]:>7.1f}\n\n\n\n\n')
+        self.ui.listWidget_3.addItem(f'Total : {total[0]:>14.1f}{total[1]:>7.1f}{total[2]:>7.1f}{total[3]:>7.1f}{total[4]:>8.1f}{total[5]:>7.1f}\n')
         self.user_info.day_total = total[0]
         self.ui.day_total.setPlainText(str(f'{self.user_info.day_total:.1f}'))
         self.ui.pred_weight.setPlainText(str(f'{self.user_info.pred_weight():.1f}'))

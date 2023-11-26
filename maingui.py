@@ -82,7 +82,7 @@ class Ui_MainWindow(object):
         # self.listView_2.setObjectName("listView_2")
         # view -> widget
         self.listWidget_2 = QtWidgets.QListWidget(self.tab_3)
-        self.listWidget_2.setGeometry(QtCore.QRect(160, 155, 421, 350))
+        self.listWidget_2.setGeometry(QtCore.QRect(160, 155, 421, 230))
         self.listWidget_2.setObjectName("listWidget_2")
 
         # add today list
