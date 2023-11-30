@@ -4,7 +4,14 @@ from ultralytics import YOLO
 from flask import jsonify
 import numpy
 
+import os
 
+
+# 檢查當前路徑中有無temp資料夾，若無則建立一個
+current_directory = os.getcwd()
+folder_path = os.path.join(current_directory, 'temp')
+if not os.path.exists(folder_path):
+    os.makedirs(folder_path)
 
 
 app = Flask(__name__)
@@ -13,12 +20,12 @@ app = Flask(__name__)
 def upload_file():
     try:
         uploaded_file = request.files['file']
-        uploaded_file.save('save/' + uploaded_file.filename)
+        uploaded_file.save('temp/' + uploaded_file.filename)
 
 
         #yolo
         yolo = YOLO("weight/best_1115.pt")
-        resultslist = yolo(f'save/{uploaded_file.filename}', conf=0.5)
+        resultslist = yolo(f'temp/{uploaded_file.filename}', conf=0.5)
         scan_list = []
 
         for result in resultslist:
