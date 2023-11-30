@@ -10,7 +10,8 @@ import mysql.connector
 from datetime import datetime
 from myfood_sql import *
 from PyQt5.QtWidgets import QApplication, QMessageBox
-
+import ast
+import requests
 
 
 class MyApplication(QtWidgets.QMainWindow):
@@ -112,15 +113,28 @@ class MyApplication(QtWidgets.QMainWindow):
             # 將拍攝的照片轉換成 PIL Image
             pil_image = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
 
+            ngrok_url = '***'   # Ngrok url
+            img_bytesio = BytesIO()
+            pil_image.save(img_bytesio, format='JPEG')
+            img_bytes = img_bytesio.getvalue()
+            files = {'file': ('image.jpg', img_bytes, 'image/jpeg')}
+            response = requests.post(f'{ngrok_url}/upload', files=files)
+            
+            resultslist = response.text
+            float_list = ast.literal_eval(resultslist)
+            self.scan_list = [int(num) for num in float_list]
+
+
+            # 本地使用yolo模型
             # 將照片進行模型預測，conf = 0.5
-            resultslist = self.yolo(pil_image, conf=0.5)
+            # resultslist = self.yolo(pil_image, conf=0.5)
 
             
-            for result in resultslist:
-                ccc = result.boxes.cls.numpy()
-                names = result.names
-                for i in ccc:
-                    self.scan_list.append(i) # [id, name]
+            # for result in resultslist:
+            #     ccc = result.boxes.cls.numpy()
+            #     names = result.names
+            #     for i in ccc:
+            #         self.scan_list.append(i) # [id, name]
 
             # 將 food_list 顯示在 listWidget 中
             self.ui.listWidget.clear()
