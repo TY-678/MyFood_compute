@@ -12,6 +12,7 @@ from myfood_sql import *
 from PyQt5.QtWidgets import QApplication, QMessageBox
 import ast
 import requests
+from url import url
 
 
 class MyApplication(QtWidgets.QMainWindow):
@@ -112,8 +113,9 @@ class MyApplication(QtWidgets.QMainWindow):
         if ret:
             # 將拍攝的照片轉換成 PIL Image
             pil_image = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
-
-            ngrok_url = '***'   # Ngrok url
+            
+            # Ngrok url
+            ngrok_url = url
             img_bytesio = BytesIO()
             pil_image.save(img_bytesio, format='JPEG')
             img_bytes = img_bytesio.getvalue()
@@ -122,6 +124,7 @@ class MyApplication(QtWidgets.QMainWindow):
             
             resultslist = response.text
             float_list = ast.literal_eval(resultslist)
+            
             self.scan_list = [int(num) for num in float_list]
 
 

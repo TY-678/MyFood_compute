@@ -88,7 +88,7 @@ MyFood 是一個協助使用者追蹤他們每天攝取的食物，並管理其�
 
 **3. 設定後端URL ：**
 
-   - 修改 MyFood.py line 116, ngrok_url = '***' 
+   - 修改 url.py line 2, url = '***' 
    - 將 *** 換成 Ngrok 視窗中顯示的 Forwarding https://xxxxx
      
 
