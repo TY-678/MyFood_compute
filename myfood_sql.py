@@ -8,11 +8,11 @@ class DatabaseConnector:
 
     def sql_connect(self):
         self.connection = psycopg2.connect(
-            host="localhost",
-            port="5432",
-            user="ty",
-            password="tymacminipassword",
-            database="my_food",
+            host="x",
+            port="x",
+            user="x",
+            password="x",
+            database="x",
         )
         self.cursor = self.connection.cursor()
 

@@ -1,10 +1,9 @@
-from fastapi import FastAPI, File, UploadFile
-from fastapi.responses import JSONResponse
-import cv2
-from ultralytics import YOLO
-import numpy
 import os
 import shutil
+from fastapi import FastAPI, File, UploadFile
+from fastapi.responses import JSONResponse
+from ultralytics import YOLO
+
 
 # 檢查當前路徑中有無temp資料夾，若無則建立一個
 current_directory = os.getcwd()

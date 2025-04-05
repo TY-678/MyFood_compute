@@ -19,11 +19,11 @@ import psycopg2
 
 # 連接到 MyFood 資料庫
 connection = psycopg2.connect(
-    host="localhost",
-    port="5432",
-    user="ty",
-    password="tymacminipassword",
-    dbname="my_food",
+    host="x",
+    port="x",
+    user="x",
+    password="x",
+    dbname="x",
 )
 cursor = connection.cursor()
 

@@ -1,2 +1,2 @@
 # 將 *** 換成 Ngrok 視窗中顯示的 Forwarding https://xxxxx
-url = '***'
+url = "http://127.0.0.1:8000"

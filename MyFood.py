@@ -135,16 +135,6 @@ class MyApplication(QtWidgets.QMainWindow):
 
             self.scan_list = [int(num) for num in float_list]
 
-            # 本地使用yolo模型
-            # 將照片進行模型預測，conf = 0.5
-            # resultslist = self.yolo(pil_image, conf=0.5)
-
-            # for result in resultslist:
-            #     ccc = result.boxes.cls.numpy()
-            #     names = result.names
-            #     for i in ccc:
-            #         self.scan_list.append(i) # [id, name]
-
             # 將 food_list 顯示在 listWidget 中
             self.ui.listWidget.clear()
             print_list = ["Name", "Cal", "Pro"]
