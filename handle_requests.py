@@ -41,7 +41,7 @@ def get_food(id: int) -> ProductInfo:
     return ProductInfo(**response.json())
 
 
-def upload_image(file: UploadFile = File(...)):
-    url = f"{BACKEND_URL}/upload"
-    response = requests.post(url, file=file)
+def upload_image(file: UploadFile = File(...)) -> list[int]:
+    url = f"{BACKEND_URL}/image/upload"
+    response = requests.post(url, files=file)
     return response.json()

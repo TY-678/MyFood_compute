@@ -79,8 +79,8 @@ class MyApplication(QtWidgets.QMainWindow):
             tdee=user_info.tdee,
         )
 
-        self.ui.now_weight.setPlainText(str(f"{user_info[0][2]:.1f}"))
-        self.ui.days.setPlainText(str(f"{user_info[0][4]:.0f}"))
+        self.ui.now_weight.setPlainText(str(f"{user_info.weight:.1f}"))
+        self.ui.days.setPlainText(str(f"{user_info.target_time:.0f}"))
         self.user_info.can_eat = self.user_info.count_cal_day()
         self.ui.can_eat.setPlainText(str(f"{self.user_info.can_eat:.1f}"))
         self.ui.day_total.setPlainText(str(f"{self.user_info.day_total:.1f}"))
@@ -148,13 +148,14 @@ class MyApplication(QtWidgets.QMainWindow):
             img_bytes = img_bytesio.getvalue()
             files = {"file": ("image.jpg", img_bytes, "image/jpeg")}
             # response = requests.post(f"{ngrok_url}/image/upload", files=files)
-            result_list = handle_requests.upload_image(file=files)
+            self.scan_list = handle_requests.upload_image(file=files)
+
             # TODO
 
             # float_list = ast.literal_eval(resultslist)
 
             # self.scan_list = [int(num) for num in float_list]
-            self.scan_list = [int(num) for num in result_list]
+            # self.scan_list = [int(num) for num in result_list]
 
             # 將 food_list 顯示在 listWidget 中
             self.ui.listWidget.clear()

@@ -4,7 +4,6 @@ from fastapi import File, UploadFile
 from fastapi.responses import JSONResponse
 from ultralytics import YOLO
 
-# from utils.tools import create_temp_folder
 import os
 
 
@@ -29,14 +28,11 @@ class ImageRecognition:
 
         return file_path
 
-    def recognize_image(self, file_path: str):
+    def recognize_image(self, file_path: str) -> list[int]:
         yolo = YOLO("weight/best_1115.pt")
         resultslist = yolo(file_path, conf=0.5)
         scan_list = []
 
         for result in resultslist:
-            ddd = result.boxes.cls.tolist()
-            for i in ddd:
-                scan_list.append(i)
-
-        return JSONResponse(content=scan_list)
+            scan_list.extend([int(i) for i in result.boxes.cls.tolist()])
+        return scan_list
