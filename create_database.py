@@ -1,12 +1,13 @@
 import psycopg2
+from env_setting import env_setting
 
 # 建立資料庫與資料表
 
 # connection = psycopg2.connect(
-#     host="localhost",
-#     port="5432",
-#     user="ty",
-#     password="tymacminipassword",
+#     host="x",
+#     port="x",
+#     user="x",
+#     password="x",
 #     dbname="my_food",  # 預設連接到 postgres 資料庫
 # )
 
@@ -18,12 +19,13 @@ import psycopg2
 # connection.close()
 
 # 連接到 MyFood 資料庫
+db_info = env_setting()
 connection = psycopg2.connect(
-    host="x",
-    port="x",
-    user="x",
-    password="x",
-    dbname="x",
+    host=db_info.host,
+    port=db_info.port,
+    user=db_info.user,
+    password=db_info.password,
+    dbname=db_info.database,
 )
 cursor = connection.cursor()
 

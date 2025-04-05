@@ -9,11 +9,15 @@ import numpy as np
 
 # import mysql.connector
 from datetime import datetime
-from myfood_sql import *
+
+# from myfood_sql import *
 from PyQt5.QtWidgets import QApplication, QMessageBox
 import ast
+
+from myfood_compute.api.schema.user_schema import UserInfo, UserFoodHistory
+from myfood_compute.api.schema.food_schema import ProductInfo
 import requests
-from url import url
+import handle_requests
 
 
 class MyApplication(QtWidgets.QMainWindow):
@@ -51,22 +55,28 @@ class MyApplication(QtWidgets.QMainWindow):
         # scan list
         self.scan_list = []
 
+        # TODO -> change sql
         # connect sql
-        self.sql = DatabaseConnector()
+        # self.sql = DatabaseConnector()
 
-        # 資料庫讀取主頁的五個欄位
-        self.sql.sql_connect()
-        self.sql.cursor.execute(f"SELECT * FROM user_info ORDER BY id DESC LIMIT 1;")
-        user_info = self.sql.cursor.fetchall()
-        self.sql.sql_close()
+        # # 資料庫讀取主頁的五個欄位
+        # self.sql.sql_connect()
+        # self.sql.cursor.execute(f"SELECT * FROM user_info ORDER BY id DESC LIMIT 1;")
+        # user_info = self.sql.cursor.fetchall()
+        # self.sql.sql_close()
+        user_info = handle_requests.get_user_info()
 
-        user_height = float(user_info[0][1])
-        user_weight = float(user_info[0][2])
-        target_weight = float(user_info[0][3])
-        target_time = float(user_info[0][4])
-        tdee = float(user_info[0][5])
+        # user_height = float(user_info[0][1])
+        # user_weight = float(user_info[0][2])
+        # target_weight = float(user_info[0][3])
+        # target_time = float(user_info[0][4])
+        # tdee = float(user_info[0][5])
         self.user_info = FoodComputer(
-            user_height, user_weight, target_weight, target_time, tdee
+            user_height=user_info.height,
+            user_weight=user_info.weight,
+            target_weight=user_info.target_weight,
+            target_time=user_info.target_time,
+            tdee=user_info.tdee,
         )
 
         self.ui.now_weight.setPlainText(str(f"{user_info[0][2]:.1f}"))
@@ -86,14 +96,23 @@ class MyApplication(QtWidgets.QMainWindow):
             self.user_info.tdee,
         ) = self.ui.update_userinfo()
 
+        # TODO -> update sql
         # user info save to database
-        self.sql.sql_connect()
-        self.sql.cursor.execute(
-            f"""insert into user_info 
-            (height, weight, target_weight, target_time, tdee)
-            values ({self.user_info.user_height}, {self.user_info.user_weight}, {self.user_info.target_weight}, {self.user_info.target_time}, {self.user_info.tdee});"""
+        # self.sql.sql_connect()
+        # self.sql.cursor.execute(
+        #     f"""insert into user_info
+        #     (height, weight, target_weight, target_time, tdee)
+        #     values ({self.user_info.user_height}, {self.user_info.user_weight}, {self.user_info.target_weight}, {self.user_info.target_time}, {self.user_info.tdee});"""
+        # )
+        # self.sql.sql_close()
+        new_user_info = UserInfo(
+            height=self.user_info.user_height,
+            weight=self.user_info.user_weight,
+            target_weight=self.user_info.target_weight,
+            target_time=self.user_info.target_time,
+            tdee=self.user_info.tdee,
         )
-        self.sql.sql_close()
+        handle_requests.update_user_info(new_user_info=new_user_info)
 
         # 顯示在主頁的五個欄位中
         self.ui.now_weight.setPlainText(str(f"{self.user_info.user_weight:.1f}"))
@@ -123,17 +142,19 @@ class MyApplication(QtWidgets.QMainWindow):
             pil_image = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
 
             # Ngrok url
-            ngrok_url = url
+            # ngrok_url = url
             img_bytesio = BytesIO()
             pil_image.save(img_bytesio, format="JPEG")
             img_bytes = img_bytesio.getvalue()
             files = {"file": ("image.jpg", img_bytes, "image/jpeg")}
-            response = requests.post(f"{ngrok_url}/upload", files=files)
+            # response = requests.post(f"{ngrok_url}/image/upload", files=files)
+            result_list = handle_requests.upload_image(file=files)
+            # TODO
 
-            resultslist = response.text
-            float_list = ast.literal_eval(resultslist)
+            # float_list = ast.literal_eval(resultslist)
 
-            self.scan_list = [int(num) for num in float_list]
+            # self.scan_list = [int(num) for num in float_list]
+            self.scan_list = [int(num) for num in result_list]
 
             # 將 food_list 顯示在 listWidget 中
             self.ui.listWidget.clear()
@@ -142,16 +163,20 @@ class MyApplication(QtWidgets.QMainWindow):
                 f"{print_list[0]:<13}{print_list[1]:>10}{print_list[2]:>10}"
             )
             for food in self.scan_list:
-                self.sql.sql_connect()
-                self.sql.cursor.execute(
-                    f"select Product, Calories, Carbohydrate, Protein, Fat, Sodium, Sugar from food_list where ID = '{food}';"
+                # TODO -> change sql
+                # self.sql.sql_connect()
+                # self.sql.cursor.execute(
+                #     f"select Product, Calories, Carbohydrate, Protein, Fat, Sodium, Sugar from food_list where ID = '{food}';"
+                # )
+                # f = self.sql.cursor.fetchall()
+
+                # self.sql.sql_close()
+                f = handle_requests.get_food(id=food)
+                self.ui.listWidget.addItem(
+                    f"{f.product:13}{f.calories:10}{f.protein:10}"
                 )
-                f = self.sql.cursor.fetchall()
-
-                self.sql.sql_close()
-
-                for i in f:
-                    self.ui.listWidget.addItem(f"{i[0]:13}{i[1]:10}{i[3]:10}")
+                # for i in f:
+                #     self.ui.listWidget.addItem(f"{i[0]:13}{i[1]:10}{i[3]:10}")
 
     # save to database
     def add_to_database(self):
@@ -162,12 +187,17 @@ class MyApplication(QtWidgets.QMainWindow):
         )
 
         for food in self.scan_list:
-            # add to user_food_history
-            self.sql.sql_connect()
-            self.sql.cursor.execute(
-                f"insert into user_food_history values ('{formatted_date}', {food})"
-            )
-            self.sql.sql_close()
+
+            # TODO -> change sql
+
+            # # add to user_food_history
+            # self.sql.sql_connect()
+            # self.sql.cursor.execute(
+            #     f"insert into user_food_history values ('{formatted_date}', {food})"
+            # )
+            # self.sql.sql_close()
+            new_history = UserFoodHistory(food_id=food, date=formatted_date)
+            handle_requests.add_user_history(new_history=new_history)
 
         self.delete_list()
 
@@ -212,18 +242,21 @@ class MyApplication(QtWidgets.QMainWindow):
 
         # check date
         self.ui.listWidget_2.clear()
-        self.sql.sql_connect()
 
-        self.sql.cursor.execute(
-            f"select Product, Calories, Carbohydrate, Protein, Fat, Sodium, Sugar\
-                                from food_list\
-                                join user_food_history\
-                                on food_list.ID = user_food_history.ID\
-                                where Date = '{check_date}';"
-        )
-        f = self.sql.cursor.fetchall()
+        # TODO -> change sql
+        # self.sql.sql_connect()
 
-        self.sql.sql_close()
+        # self.sql.cursor.execute(
+        #     f"select Product, Calories, Carbohydrate, Protein, Fat, Sodium, Sugar\
+        #                         from food_list\
+        #                         join user_food_history\
+        #                         on food_list.ID = user_food_history.ID\
+        #                         where Date = '{check_date}';"
+        # )
+        # f = self.sql.cursor.fetchall()
+        # self.sql.sql_close()
+        user_food_history = handle_requests.get_user_history(date=check_date)
+
         print_line = f"-----------------------------------------------------------"
         Nutrients = ["Cal", "Carb", "Pro", "Fat", "Na", "Sug"]
         self.ui.listWidget_2.addItem(
@@ -231,12 +264,16 @@ class MyApplication(QtWidgets.QMainWindow):
         )
         self.ui.listWidget_2.addItem(f"{print_line}")
         total = [0, 0, 0, 0, 0, 0]
-        for i in f:
+        for food in user_food_history:
             self.ui.listWidget_2.addItem(
-                f"{i[0]:<15}{i[1]:>7.1f}{i[2]:>7.1f}{i[3]:>7.1f}{i[4]:>7.1f}{i[5]:>8.1f}{i[6]:>7.1f} "
+                f"{food.product:<15}{food.calories:>7.1f}{food.carbohydrate:>7.1f}{food.protein:>7.1f}{food.fat:>7.1f}{food.sodium:>8.1f}{food.sugar:>7.1f} "
             )
-            for j in range(1, 7):
-                total[j - 1] += float(i[j])
+            total[0] += food.calories
+            total[1] += food.carbohydrate
+            total[2] += food.protein
+            total[3] += food.fat
+            total[4] += food.sodium
+            total[5] += food.sugar
         self.ui.listWidget_2.addItem(f"{print_line}")
         self.ui.listWidget_2.addItem(
             f"Total : {total[0]:>14.1f}{total[1]:>7.1f}{total[2]:>7.1f}{total[3]:>7.1f}{total[4]:>8.1f}{total[5]:>7.1f} \n"
@@ -249,30 +286,38 @@ class MyApplication(QtWidgets.QMainWindow):
         formatted_date = current_datetime.strftime(
             "%Y,{:d},{:d}".format(current_datetime.month, current_datetime.day)
         )
-        self.sql.sql_connect()
 
-        self.sql.cursor.execute(
-            f"select Product, Calories, Carbohydrate, Protein, Fat, Sodium, Sugar\
-                                from food_list\
-                                join user_food_history\
-                                on food_list.ID = user_food_history.ID\
-                                where Date = '{formatted_date}';"
-        )
-        f = self.sql.cursor.fetchall()
+        # TODO -> change sql
+        # self.sql.sql_connect()
 
-        self.sql.sql_close()
+        # self.sql.cursor.execute(
+        #     f"select Product, Calories, Carbohydrate, Protein, Fat, Sodium, Sugar\
+        #                         from food_list\
+        #                         join user_food_history\
+        #                         on food_list.ID = user_food_history.ID\
+        #                         where Date = '{formatted_date}';"
+        # )
+        # f = self.sql.cursor.fetchall()
+        # self.sql.sql_close()
+        f = handle_requests.get_user_history(date=formatted_date)
 
         self.ui.listWidget_3.addItem(
             f"Today :{Nutrients[0]:>14}{Nutrients[1]:>7}{Nutrients[2]:>7}{Nutrients[3]:>7}{Nutrients[4]:>7}{Nutrients[5]:>8}"
         )
         self.ui.listWidget_3.addItem(f"{print_line}")
         total = [0, 0, 0, 0, 0, 0]
-        for i in f:
+        for food in user_food_history:
             self.ui.listWidget_3.addItem(
-                f"{i[0]:<15}{i[1]:>7.1f}{i[2]:>7.1f}{i[3]:>7.1f}{i[4]:>7.1f}{i[5]:>8.1f}{i[6]:>7.1f} "
+                f"{food.product:<15}{food.calories:>7.1f}{food.carbohydrate:>7.1f}{food.protein:>7.1f}{food.fat:>7.1f}{food.sodium:>8.1f}{food.sugar:>7.1f} "
             )
-            for j in range(1, 7):
-                total[j - 1] += float(i[j])
+            total[0] += food.calories
+            total[1] += food.carbohydrate
+            total[2] += food.protein
+            total[3] += food.fat
+            total[4] += food.sodium
+            total[5] += food.sugar
+            # for j in range(1, 7):
+            #     total[j - 1] += float(i[j])
         self.ui.listWidget_3.addItem(f"{print_line}")
         self.ui.listWidget_3.addItem(
             f"Total : {total[0]:>14.1f}{total[1]:>7.1f}{total[2]:>7.1f}{total[3]:>7.1f}{total[4]:>8.1f}{total[5]:>7.1f}\n"
