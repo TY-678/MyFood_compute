@@ -1,4 +1,5 @@
-import mysql.connector
+import psycopg2
+
 
 class DatabaseConnector:
     def __init__(self):
@@ -6,12 +7,12 @@ class DatabaseConnector:
         self.cursor = None
 
     def sql_connect(self):
-        self.connection = mysql.connector.connect(
-            host='localhost',
-            port='3306',
-            user='xxxx',
-            password='xxxx',
-            database='MyFood'
+        self.connection = psycopg2.connect(
+            host="localhost",
+            port="5432",
+            user="ty",
+            password="tymacminipassword",
+            database="my_food",
         )
         self.cursor = self.connection.cursor()
 
