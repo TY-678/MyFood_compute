@@ -1,13 +1,10 @@
-import psycopg2
-from myfood_compute.config.env_setting import env_setting
-
-
 import asyncio
 import asyncpg
 from fastapi import HTTPException
+from myfood_compute.config.env_setting import database_setting
 
 
-connect = env_setting()
+connect = database_setting()
 
 
 class BaseDao:
@@ -23,25 +20,3 @@ class BaseDao:
 
     def __await__(self):
         return self.__aenter__().__await__()
-
-
-# class DatabaseConnector:
-#     def __init__(self):
-#         self.connection = None
-#         self.cursor = None
-#         self.db_info = env_setting()
-
-#     def sql_connect(self):
-#         self.connection = psycopg2.connect(
-#             host=self.db_info.host,
-#             port=self.db_info.port,
-#             user=self.db_info.user,
-#             password=self.db_info.password,
-#             database=self.db_info.database,
-#         )
-#         self.cursor = self.connection.cursor()
-
-#     def sql_close(self):
-#         self.cursor.close()
-#         self.connection.commit()
-#         self.connection.close()

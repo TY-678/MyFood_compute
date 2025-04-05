@@ -1,10 +1,9 @@
+import os
 import shutil
 import uuid
 from fastapi import File, UploadFile
 from fastapi.responses import JSONResponse
 from ultralytics import YOLO
-
-import os
 
 
 class ImageRecognition:
@@ -29,7 +28,7 @@ class ImageRecognition:
         return file_path
 
     def recognize_image(self, file_path: str) -> list[int]:
-        yolo = YOLO("weight/best_1115.pt")
+        yolo = YOLO("weight/best.pt")
         resultslist = yolo(file_path, conf=0.5)
         scan_list = []
 

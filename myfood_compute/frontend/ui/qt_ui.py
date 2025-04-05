@@ -62,7 +62,7 @@ class Ui_MainWindow(object):
         self.listWidget = QtWidgets.QListWidget(self.tab_2)
         self.listWidget.setGeometry(QtCore.QRect(300, 20, 281, 291))
         self.listWidget.setObjectName("listWidget")
-        
+
         self.tabWidget.addTab(self.tab_2, "")
         self.tab_3 = QtWidgets.QWidget()
         self.tab_3.setObjectName("tab_3")
@@ -76,10 +76,7 @@ class Ui_MainWindow(object):
         self.save_Button = QtWidgets.QPushButton(self.tab_3)
         self.save_Button.setGeometry(QtCore.QRect(30, 75, 113, 32))
         self.save_Button.setObjectName("save_Button")
-        
-        # self.listView_2 = QtWidgets.QListView(self.tab_3)
-        # self.listView_2.setGeometry(QtCore.QRect(160, 10, 421, 351))
-        # self.listView_2.setObjectName("listView_2")
+
         # view -> widget
         self.listWidget_2 = QtWidgets.QListWidget(self.tab_3)
         self.listWidget_2.setGeometry(QtCore.QRect(160, 155, 421, 230))
@@ -90,9 +87,6 @@ class Ui_MainWindow(object):
         self.listWidget_3.setGeometry(QtCore.QRect(160, 10, 421, 140))
         self.listWidget_3.setObjectName("listWidget_3")
 
-
-
-        
         self.tabWidget.addTab(self.tab_3, "")
         self.tab_4 = QtWidgets.QWidget()
         self.tab_4.setObjectName("tab_4")
@@ -118,7 +112,7 @@ class Ui_MainWindow(object):
         self.gender = QtWidgets.QTextEdit(self.tab_4)
         self.gender.setGeometry(QtCore.QRect(290, 290, 111, 31))
         self.gender.setObjectName("gender")
-        
+
         self.label = QtWidgets.QLabel(self.tab_4)
         self.label.setGeometry(QtCore.QRect(180, 60, 60, 16))
         self.label.setObjectName("label")
@@ -143,7 +137,6 @@ class Ui_MainWindow(object):
         self.label_12.setGeometry(QtCore.QRect(180, 300, 60, 16))
         self.label_12.setObjectName("label_5")
 
-
         self.update_userinfo_Button = QtWidgets.QPushButton(self.tab_4)
         self.update_userinfo_Button.setGeometry(QtCore.QRect(290, 340, 113, 32))
         self.update_userinfo_Button.setObjectName("update_userinfo_Button")
@@ -152,7 +145,6 @@ class Ui_MainWindow(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-        
 
         self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(1)
@@ -164,64 +156,107 @@ class Ui_MainWindow(object):
         self.listWidget_2.setStyleSheet('font-family: "Courier New", monospace;')
         self.listWidget.setStyleSheet('font-family: "Courier New", monospace;')
 
-
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "My Food"))
         self.label_6.setText(_translate("MainWindow", "目前體重"))
         self.label_7.setText(_translate("MainWindow", "目標天數"))
-        self.label_8.setText(_translate("MainWindow", "若未來飲食皆與今天相同，目標日體重為"))
+        self.label_8.setText(
+            _translate("MainWindow", "若未來飲食皆與今天相同，目標日體重為")
+        )
         self.label_9.setText(_translate("MainWindow", "目前每日飲食熱量"))
-        self.label_10.setText(_translate("MainWindow", "每日攝取多少熱量，在目標日可達成目標體重"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), _translate("MainWindow", "主頁"))
+        self.label_10.setText(
+            _translate("MainWindow", "每日攝取多少熱量，在目標日可達成目標體重")
+        )
+        self.tabWidget.setTabText(
+            self.tabWidget.indexOf(self.tab), _translate("MainWindow", "主頁")
+        )
         self.take_photo_Button.setText(_translate("MainWindow", "拍照"))
         self.add_to_list_Button.setText(_translate("MainWindow", "加入"))
         self.delete_list_Button.setText(_translate("MainWindow", "重新拍攝"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "加入食物"))
+        self.tabWidget.setTabText(
+            self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "加入食物")
+        )
         self.date_Button.setText(_translate("MainWindow", "查詢"))
 
-        #add
+        # add
         self.save_Button.setText(_translate("MainWindow", "完成本日飲食"))
 
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), _translate("MainWindow", "飲食紀錄"))
-        self.user_height.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">cm</p></body></html>"))
-        self.target_time.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">days</p></body></html>"))
-        self.target_weight.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">kg</p></body></html>"))
-        self.user_weight.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">kg</p></body></html>"))
-        self.exercises.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">0~7</p></body></html>"))
-        
-        self.gender.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">男/女</p></body></html>"))
+        self.tabWidget.setTabText(
+            self.tabWidget.indexOf(self.tab_3), _translate("MainWindow", "飲食紀錄")
+        )
+        self.user_height.setHtml(
+            _translate(
+                "MainWindow",
+                '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">\n'
+                '<html><head><meta name="qrichtext" content="1" /><style type="text/css">\n'
+                "p, li { white-space: pre-wrap; }\n"
+                "</style></head><body style=\" font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+                '<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">cm</p></body></html>',
+            )
+        )
+        self.target_time.setHtml(
+            _translate(
+                "MainWindow",
+                '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">\n'
+                '<html><head><meta name="qrichtext" content="1" /><style type="text/css">\n'
+                "p, li { white-space: pre-wrap; }\n"
+                "</style></head><body style=\" font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+                '<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">days</p></body></html>',
+            )
+        )
+        self.target_weight.setHtml(
+            _translate(
+                "MainWindow",
+                '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">\n'
+                '<html><head><meta name="qrichtext" content="1" /><style type="text/css">\n'
+                "p, li { white-space: pre-wrap; }\n"
+                "</style></head><body style=\" font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+                '<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">kg</p></body></html>',
+            )
+        )
+        self.user_weight.setHtml(
+            _translate(
+                "MainWindow",
+                '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">\n'
+                '<html><head><meta name="qrichtext" content="1" /><style type="text/css">\n'
+                "p, li { white-space: pre-wrap; }\n"
+                "</style></head><body style=\" font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+                '<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">kg</p></body></html>',
+            )
+        )
+        self.exercises.setHtml(
+            _translate(
+                "MainWindow",
+                '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">\n'
+                '<html><head><meta name="qrichtext" content="1" /><style type="text/css">\n'
+                "p, li { white-space: pre-wrap; }\n"
+                "</style></head><body style=\" font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+                '<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">0~7</p></body></html>',
+            )
+        )
 
-        self.age.setHtml(_translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'.AppleSystemUIFont\'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">yesrs old</p></body></html>"))
+        self.gender.setHtml(
+            _translate(
+                "MainWindow",
+                '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">\n'
+                '<html><head><meta name="qrichtext" content="1" /><style type="text/css">\n'
+                "p, li { white-space: pre-wrap; }\n"
+                "</style></head><body style=\" font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+                '<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">男/女</p></body></html>',
+            )
+        )
 
+        self.age.setHtml(
+            _translate(
+                "MainWindow",
+                '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">\n'
+                '<html><head><meta name="qrichtext" content="1" /><style type="text/css">\n'
+                "p, li { white-space: pre-wrap; }\n"
+                "</style></head><body style=\" font-family:'.AppleSystemUIFont'; font-size:13pt; font-weight:400; font-style:normal;\">\n"
+                '<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">yesrs old</p></body></html>',
+            )
+        )
 
         self.label.setText(_translate("MainWindow", "身高"))
         self.label_2.setText(_translate("MainWindow", "目標時間"))
@@ -231,9 +266,10 @@ class Ui_MainWindow(object):
         self.label_11.setText(_translate("MainWindow", "年齡"))
         self.label_12.setText(_translate("MainWindow", "性別"))
         self.update_userinfo_Button.setText(_translate("MainWindow", "更新"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), _translate("MainWindow", "個人資料"))
+        self.tabWidget.setTabText(
+            self.tabWidget.indexOf(self.tab_4), _translate("MainWindow", "個人資料")
+        )
         self.update_userinfo_Button.clicked.connect(self.update_userinfo)
-
 
     def update_userinfo(self):
         user_weight = float(self.user_weight.toPlainText())
@@ -243,16 +279,25 @@ class Ui_MainWindow(object):
         gender = str(self.gender.toPlainText())
         age = float(self.age.toPlainText())
         exercises = float(self.exercises.toPlainText())
-        
-        c = 1.2 if exercises == 0 else (1.375 if exercises < 3 else (1.55 if exercises < 6 else 1.725))
-        bmr = 10 * user_weight + 6.25 * user_height - 5 * age + 5 if gender == '男' else 10 * user_weight + 6.25 * user_height - 5 * age -161
-        tdee = bmr * c
 
+        c = (
+            1.2
+            if exercises == 0
+            else (1.375 if exercises < 3 else (1.55 if exercises < 6 else 1.725))
+        )
+        bmr = (
+            10 * user_weight + 6.25 * user_height - 5 * age + 5
+            if gender == "男"
+            else 10 * user_weight + 6.25 * user_height - 5 * age - 161
+        )
+        tdee = bmr * c
 
         return user_height, user_weight, target_weight, target_time, tdee
 
+
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()

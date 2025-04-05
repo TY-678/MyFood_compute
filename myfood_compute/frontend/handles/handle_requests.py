@@ -1,6 +1,6 @@
 import requests
 from fastapi import File, UploadFile
-from url import url
+from myfood_compute.config.env_setting import server_setting
 from myfood_compute.api.schema.user_schema import (
     UserInfo,
     UserFoodHistory,
@@ -8,7 +8,8 @@ from myfood_compute.api.schema.user_schema import (
 )
 from myfood_compute.api.schema.food_schema import ProductInfo
 
-BACKEND_URL = url
+
+BACKEND_URL = server_setting().url
 
 
 def get_user_info() -> UserInfo:

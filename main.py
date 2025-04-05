@@ -1,6 +1,5 @@
 from PyQt5 import QtWidgets
-from MyFood import MyApplication
-
+from myfood_compute.frontend.handles.bo import MyApplication
 
 if __name__ == "__main__":
     import sys
